@@ -18,7 +18,7 @@ import           Miso.SPA.Types
 import           Miso.SPA.Utils              (try)
 import           Miso.String
 
-data Request response payload
+data Request payload
     = GET
         { url     :: MisoString
         , headers :: [(MisoString, MisoString)]
@@ -29,23 +29,23 @@ data Request response payload
         , payload :: Maybe payload
         }
 
-get :: FromJSON resp => Request resp ()
+get :: Request ()
 get = GET
     { url     = ""
     , headers = [("Content-Type", "application/json")]
     }
 
-post :: (FromJSON response, ToJSON payload) => Request response payload
+post :: (ToJSON payload) => Request payload
 post = POST
     { url     = ""
     , headers = [("Content-Type", "application/json")]
     , payload = Nothing
     }
 
--- getLocalFile :: MisoString -> JSM (Response MisoString)
--- getLocalFile path = Miso.Http.sendPlain $ get { url = path, headers = [] }
+getLocalFile :: MisoString -> JSM (Response MisoString)
+getLocalFile path = Miso.Http.sendPlain $ get { url = path, headers = [] }
 
-send :: (FromJSON response, ToJSON response, ToJSON payload) => Request response payload -> JSM (Response response)
+send :: (FromJSON response, ToJSON response, ToJSON payload) => Request payload -> JSM (Response response)
 send = \case
     GET url headers -> do
         req <- newXMLHttpRequest
@@ -86,7 +86,7 @@ send = \case
                     Left err  -> pure $ HttpError (ms err) statusNum
             Left (SomeException _) -> pure $ HttpError "XHRError" 404
 
-sendPlain :: ToJSON payload => Request MisoString payload -> JSM (Response MisoString)
+sendPlain :: ToJSON payload => Request payload -> JSM (Response MisoString)
 sendPlain = \case
     GET url headers -> do
         req <- newXMLHttpRequest
