@@ -1,0 +1,16 @@
+resolver: lts-14.12
+
+packages:
+- .
+
+extra-deps:
+- jsaddle-0.9.6.0
+- jsaddle-warp-0.9.6.0
+- jsaddle-dom-0.9.3.2
+- ref-tf-0.4.0.2
+- git: https://github.com/DoctorRyner/miso-spa
+  commit: 98f98403581d33ade0f37cc178bb43a4c5aef027
+
+flags:
+    miso:
+        jsaddle: true

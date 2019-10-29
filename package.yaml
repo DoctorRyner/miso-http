@@ -1,0 +1,23 @@
+name:                miso-http
+
+extra-source-files:
+- README.md
+
+description:         Please see the README on GitHub at <https://github.com/githubuser/miso-http#readme>
+
+dependencies:
+- base
+- miso
+- miso-spa
+- aeson
+- bytestring
+- text
+- jsaddle
+- jsaddle-dom
+
+default-extensions:
+- LambdaCase
+- OverloadedStrings
+
+library:
+  source-dirs: src
