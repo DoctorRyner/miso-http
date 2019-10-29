@@ -12,6 +12,7 @@ import qualified Data.ByteString.Char8       as BS
 import qualified Data.Text.Lazy              as TL
 import qualified Data.Text.Lazy.Encoding     as TLEncoding
 import           JSDOM.Custom.XMLHttpRequest as JSDOM hiding (error)
+import           JSDOM.Generated.Enums
 import           Language.Javascript.JSaddle hiding (JSM)
 import           Miso
 import           Miso.SPA.Types
@@ -67,12 +68,13 @@ send r = newXMLHttpRequest >>= \req -> case r of
     POST url headers maybePayload -> do
         openSimple req ("POST" :: MisoString) url
         mapM_ (uncurry $ setRequestHeader req) headers
+        setResponseType req XMLHttpRequestResponseTypeJson
         eitherXhrError <- try $ case maybePayload of
             Just payload -> JSDOM.sendString req $ ms $ encode payload
             Nothing      -> JSDOM.send req
         case eitherXhrError of
             Right _ -> do
-                resRaw <- valToJSON =<< getResponse req
+                resRaw <- valToStr =<< getResponse req
                 statusNum <- fromEnum <$> getStatus req
                 let resBS = TLEncoding.encodeUtf8 $ TL.pack $ unpack resRaw
                 case eitherDecode resBS of
