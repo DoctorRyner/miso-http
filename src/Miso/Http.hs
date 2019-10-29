@@ -35,7 +35,7 @@ get = GET
     , headers = [("Content-Type", "application/json")]
     }
 
-post :: (ToJSON payload) => Request payload
+post :: Request payload
 post = POST
     { url     = ""
     , headers = [("Content-Type", "application/json")]
