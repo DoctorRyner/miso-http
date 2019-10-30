@@ -33,13 +33,13 @@ data Request payload
 get :: Request ()
 get = GET
     { url     = ""
-    , headers = [("Content-Type", "application/json")]
+    , headers = [("Content-Type", "application/json;charset=UTF-8")]
     }
 
 post :: Request payload
 post = POST
     { url     = ""
-    , headers = [("Content-Type", "application/json")]
+    , headers = [("Content-Type", "application/json;charset=UTF-8")]
     , payload = Nothing
     }
 
