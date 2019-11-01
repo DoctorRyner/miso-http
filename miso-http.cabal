@@ -1,0 +1,33 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.31.2.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 5678102c254bcc58d6985d4a2ead6395bbdb74abb6bd194b61db94e730fe33f0
+
+name:           miso-http
+version:        0.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/miso-http#readme>
+build-type:     Simple
+extra-source-files:
+    README.md
+
+library
+  exposed-modules:
+      Miso.Http
+  other-modules:
+      Paths_miso_http
+  hs-source-dirs:
+      src
+  default-extensions: LambdaCase OverloadedStrings
+  build-depends:
+      aeson
+    , base
+    , bytestring
+    , jsaddle
+    , jsaddle-dom
+    , miso
+    , miso-spa
+    , text
+  default-language: Haskell2010
